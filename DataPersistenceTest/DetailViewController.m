@@ -24,16 +24,12 @@
 #pragma mark -
 #pragma mark UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return  100;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 105;
 }
