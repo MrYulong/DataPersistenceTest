@@ -8,17 +8,28 @@
 
 #import <Foundation/Foundation.h>
 
+@class DetailModel;
 
 typedef NS_ENUM(NSUInteger, LocalDateType) {
-    LocalDateTypePlist             = 1,
+    LocalDateTypePlist             = 0,
+    LocalDateTypeArchiver,
     LocalDateTypeSQL,
-    LocalDateTypeCoreData,
-    LocalDateTypeCoreKetedArchiver
+    LocalDateTypeCoreData
 };
 
 
 @interface DocumentDataManger : NSObject
 
-@property (nonatomic, assign) LocalDateType dataType;
+
+//查
++ (NSArray *)loadDocumentData:(LocalDateType)dataType;
+//增
++ (BOOL)insertDocumentDataWithType:(LocalDateType)dataType andModel:(DetailModel *)model;
+//改
++ (BOOL)updateDocumentDataWithType:(LocalDateType)dataType andModel:(DetailModel *)model andUpModel:(DetailModel *)updateModel;
+//删
++ (BOOL)deleDocumentDateWithType:(LocalDateType)dataType andModel:(DetailModel *)model;
+
+
 
 @end

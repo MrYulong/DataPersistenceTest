@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DocumentDataManger.h"
 
 @interface DetailViewController : UIViewController
+
+@property (nonatomic, assign) LocalDateType currentDataType;
+
 
 @end

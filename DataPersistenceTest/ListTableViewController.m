@@ -8,6 +8,7 @@
 
 #import "ListTableViewController.h"
 #import "DetailViewController.h"
+
 @interface ListTableViewController ()<UITableViewDelegate>
 
 @end
@@ -23,6 +24,7 @@
     
     UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DetailViewController *detailVC = [main instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    detailVC.currentDataType = indexPath.row;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
