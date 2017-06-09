@@ -8,7 +8,7 @@
 
 #import "DocumentDataManger.h"
 #import "PlistDataManger.h"
-
+#import "ArchiverDataManager.h"
 
 @implementation DocumentDataManger
 
@@ -20,12 +20,31 @@
         case LocalDateTypePlist:
             array = [PlistDataManger getDocumentPlistArray];
             break;
+        case LocalDateTypeArchiver:
+            array = [ArchiverDataManager getLocalDocumentData];
+            break;
         default:
             break;
     }
     return array;
 }
-
++ (BOOL)replaceDocumentDataWithType:(LocalDateType)dataType andArray:(NSArray *)array{
+    
+    if (dataType == LocalDateTypePlist) {
+        
+    }
+    switch (dataType) {
+        case LocalDateTypePlist:
+            return [PlistDataManger updateDocumentPlistArrayWithArr:array];
+            break;
+        case LocalDateTypeArchiver:
+            return [ArchiverDataManager updateLocalDataWithArray:array];
+            break;
+        default:
+            break;
+    }    
+    return NO;
+}
 + (BOOL)insertDocumentDataWithType:(LocalDateType)dataType andModel:(DetailModel *)model{
     
     

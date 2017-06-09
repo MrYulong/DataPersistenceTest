@@ -10,6 +10,7 @@
 #import "DetailInfoCell.h"
 #import "AddInfosViewController.h"
 #import "DocumentDataManger.h"
+#import "DetailModel.h"
 
 @interface DetailViewController ()<UITableViewDelegate, UITableViewDataSource, AddInfosViewControllerDelegate>
 
@@ -49,7 +50,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 105;
+    return 70;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -78,32 +79,71 @@
     UIStoryboard *storybord = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddInfosViewController *addInfoVC = [storybord instantiateViewControllerWithIdentifier:@"AddInfosViewController"];
     addInfoVC.delegate = self;
+    if (self.currentDataType == LocalDateTypePlist) {
+        
+        addInfoVC.currentModel = [DetailModel modelFromDic:self.dataArray[indexPath.row]];
+    }else{
+        addInfoVC.currentModel = self.dataArray[indexPath.row];
+    }
     [self.navigationController pushViewController:addInfoVC animated:YES];
-    
-    
-    
-}
 
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataArray];
+    [array removeObjectAtIndex:indexPath.row];
+    
+    BOOL isSuccess = false;
+    if (self.currentDataType == LocalDateTypePlist || self.currentDataType == LocalDateTypeArchiver) {
+        
+        isSuccess = [DocumentDataManger replaceDocumentDataWithType:self.currentDataType andArray:[array copy]];
+    }else{
+        
+    }
+
+    if (isSuccess) {
+        self.dataArray = [array copy];
+        [self.tableview reloadData];
+        NSLog(@"数据删除成功");
+    }
+
+}
 #pragma mark -
 #pragma mark AddInfosViewControllerDelegate
 //更新DetailModel
-- (void)addInfosViewController:(AddInfosViewController *)viewController lastModel:(DetailModel *)aLastModel updateModel:(DetailModel *)upModel{
+- (BOOL)addInfosViewController:(AddInfosViewController *)viewController lastModel:(DetailModel *)aLastModel updateModel:(DetailModel *)upModel{
     
-    
+    return NO;
 }
 //保存新的DetailModel
-- (void)addInfosViewController:(AddInfosViewController *)viewController  insertModel:(DetailModel *)inModel{
+- (BOOL)addInfosViewController:(AddInfosViewController *)viewController  insertModel:(DetailModel *)inModel{
     
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataArray];
-    [array addObject:inModel];
-    self.dataArray = [array copy];
-    [self.tableview reloadData];
+    if (self.currentDataType == LocalDateTypePlist) {
+        
+        [array addObject:[DetailModel dicFromModel:inModel]];
+
+    }else{
+        [array addObject:inModel];
+    }
+    BOOL isSuccess = false;
+    if (self.currentDataType == LocalDateTypePlist || self.currentDataType == LocalDateTypeArchiver) {
+        
+        isSuccess = [DocumentDataManger replaceDocumentDataWithType:self.currentDataType andArray:[array copy]];
+    }else{
+        
+       isSuccess = [DocumentDataManger insertDocumentDataWithType:self.currentDataType andModel:inModel];
+    }
     
-    
-    
-    
+    if (isSuccess) {
+        self.dataArray = [array copy];
+        [self.tableview reloadData];
+        NSLog(@"数据保存成功");
+    }
+    return isSuccess;
 }
-
-
 
 @end

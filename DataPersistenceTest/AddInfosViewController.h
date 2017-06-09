@@ -14,9 +14,9 @@
 @protocol AddInfosViewControllerDelegate <NSObject>
 
 //更新DetailModel
-- (void)addInfosViewController:(AddInfosViewController *)viewController lastModel:(DetailModel *)aLastModel updateModel:(DetailModel *)upModel;
+- (BOOL)addInfosViewController:(AddInfosViewController *)viewController lastModel:(DetailModel *)aLastModel updateModel:(DetailModel *)upModel;
 //保存新的DetailModel
-- (void)addInfosViewController:(AddInfosViewController *)viewController  insertModel:(DetailModel *)inModel;
+- (BOOL)addInfosViewController:(AddInfosViewController *)viewController  insertModel:(DetailModel *)inModel;
 
 
 

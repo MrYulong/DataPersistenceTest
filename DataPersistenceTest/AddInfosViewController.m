@@ -47,12 +47,21 @@
     infoModel.contentDesc  = self.desTextField.text;
     infoModel.usrpoint     = self.pointTextField.text;
     
+    BOOL isSccuess;
     if (self.currentModel) {
         
-        [self.delegate addInfosViewController:self lastModel:self.currentModel updateModel:infoModel];
+        isSccuess = [self.delegate addInfosViewController:self lastModel:self.currentModel updateModel:infoModel];
     }else{
         
-        [self.delegate addInfosViewController:self insertModel:infoModel];
+        isSccuess = [self.delegate addInfosViewController:self insertModel:infoModel];
+    }
+    if (isSccuess) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }else{
+        
+        NSLog(@"保存失败");
     }
 }
 

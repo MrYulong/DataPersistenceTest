@@ -13,23 +13,24 @@
 
 + (NSString *)localPlistPath{
     
-    NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES).firstObject;
-    path = [path stringByAppendingPathComponent:@"local/local.plist"];
+    NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    path = [path stringByAppendingPathComponent:@"plist"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    path = [path stringByAppendingPathComponent:@"local.plist"];
     return path;
 }
 
 + (BOOL)updateDocumentPlistArrayWithArr:(NSArray *)array{
     
-    BOOL success = [array writeToFile:[self localPlistPath] atomically:YES];
-    
-    return success;
+    return [array writeToFile:[self localPlistPath] atomically:YES];
 }
 
 + (NSArray *)getDocumentPlistArray{
     
-    NSArray *array = [NSArray arrayWithContentsOfFile:[self localPlistPath]];
-    
-    return array;
+    return [NSArray arrayWithContentsOfFile:[self localPlistPath]];
 }
 
 @end

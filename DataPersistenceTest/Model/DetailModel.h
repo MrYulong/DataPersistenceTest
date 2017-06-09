@@ -8,13 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DetailModel : NSObject
+@interface DetailModel : NSObject<NSCopying, NSCoding>
 
 @property (nonatomic, copy) NSString *usrName;
 
 @property (nonatomic, copy) NSString *usrpoint;
 
 @property (nonatomic, copy) NSString *contentDesc;
+
++ (NSDictionary *) dicFromModel:(DetailModel *)model;
+
++ (DetailModel *) modelFromDic:(NSDictionary *)dic;
 
 
 @end
