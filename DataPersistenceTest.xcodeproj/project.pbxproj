@@ -25,6 +25,7 @@
 		D14B6A121EE91E6E009E8F65 /* PlistDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A111EE91E6E009E8F65 /* PlistDataManger.m */; };
 		D14B6A151EE922F0009E8F65 /* DocumentDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A141EE922F0009E8F65 /* DocumentDataManger.m */; };
 		D14B6A1B1EEA7A9B009E8F65 /* ArchiverDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A1A1EEA7A9B009E8F65 /* ArchiverDataManager.m */; };
+		D14B6A1E1EEE8A7D009E8F65 /* FMDBSQLServices.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A1D1EEE8A7D009E8F65 /* FMDBSQLServices.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		D14B6A141EE922F0009E8F65 /* DocumentDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentDataManger.m; sourceTree = "<group>"; };
 		D14B6A191EEA7A9B009E8F65 /* ArchiverDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiverDataManager.h; sourceTree = "<group>"; };
 		D14B6A1A1EEA7A9B009E8F65 /* ArchiverDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiverDataManager.m; sourceTree = "<group>"; };
+		D14B6A1C1EEE8A7D009E8F65 /* FMDBSQLServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBSQLServices.h; sourceTree = "<group>"; };
+		D14B6A1D1EEE8A7D009E8F65 /* FMDBSQLServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBSQLServices.m; sourceTree = "<group>"; };
 		E2D32750E4DF895663DB8564 /* Pods-DataPersistenceTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataPersistenceTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataPersistenceTest/Pods-DataPersistenceTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +130,8 @@
 		0C8E8AE31EE98A250063CAB4 /* SQL */ = {
 			isa = PBXGroup;
 			children = (
+				D14B6A1C1EEE8A7D009E8F65 /* FMDBSQLServices.h */,
+				D14B6A1D1EEE8A7D009E8F65 /* FMDBSQLServices.m */,
 			);
 			path = SQL;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8E8AE01EE984670063CAB4 /* AddInfosViewController.m in Sources */,
+				D14B6A1E1EEE8A7D009E8F65 /* FMDBSQLServices.m in Sources */,
 				D14B69F61EE8EB46009E8F65 /* DetailViewController.m in Sources */,
 				D14B69C01EE8DCFC009E8F65 /* AppDelegate.m in Sources */,
 				D14B6A041EE91C71009E8F65 /* DetailModel.m in Sources */,

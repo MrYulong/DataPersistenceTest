@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, LocalDateType) {
 //增
 + (BOOL)insertDocumentDataWithType:(LocalDateType)dataType andModel:(DetailModel *)model;
 //改
-+ (BOOL)updateDocumentDataWithType:(LocalDateType)dataType andModel:(DetailModel *)model andUpModel:(DetailModel *)updateModel;
++ (BOOL)updateDocumentDataWithType:(LocalDateType)dataType andUpModel:(DetailModel *)updateModel;
 ///更新替换本地存储
 + (BOOL)replaceDocumentDataWithType:(LocalDateType)dataType andArray:(NSArray *)array;
 //删

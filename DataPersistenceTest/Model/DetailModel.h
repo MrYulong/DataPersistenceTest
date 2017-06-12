@@ -10,6 +10,8 @@
 
 @interface DetailModel : NSObject<NSCopying, NSCoding>
 
+@property (nonatomic, assign) NSInteger usrID;
+
 @property (nonatomic, copy) NSString *usrName;
 
 @property (nonatomic, copy) NSString *usrpoint;

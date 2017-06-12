@@ -17,6 +17,7 @@
         _usrName = [aDecoder decodeObjectForKey:@"userName"];
         _usrpoint = [aDecoder decodeObjectForKey:@"usrpoint"];
         _contentDesc = [aDecoder decodeObjectForKey:@"contentDesc"];
+        _usrID = [aDecoder decodeIntegerForKey:@"usrID"];
     }
     return self;
 }
@@ -26,6 +27,7 @@
     [aCoder encodeObject:self.usrName forKey:@"userName"];
     [aCoder encodeObject:self.usrpoint forKey:@"usrpoint"];
     [aCoder encodeObject:self.contentDesc forKey:@"contentDesc"];
+    [aCoder encodeInteger:self.usrID forKey:@"usrID"];
 
 }
 

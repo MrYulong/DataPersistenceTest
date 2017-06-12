@@ -9,6 +9,7 @@
 #import "DocumentDataManger.h"
 #import "PlistDataManger.h"
 #import "ArchiverDataManager.h"
+#import "FMDBSQLServices.h"
 
 @implementation DocumentDataManger
 
@@ -22,6 +23,9 @@
             break;
         case LocalDateTypeArchiver:
             array = [ArchiverDataManager getLocalDocumentData];
+            break;
+        case LocalDateTypeSQL:
+            array = [[FMDBSQLServices shareInstance] getDoucmentArray];
             break;
         default:
             break;
@@ -44,19 +48,44 @@
 }
 + (BOOL)insertDocumentDataWithType:(LocalDateType)dataType andModel:(DetailModel *)model{
     
+    BOOL isSuccess = NO;
     
+    switch (dataType) {
+        case LocalDateTypeSQL:
+            isSuccess =[[FMDBSQLServices shareInstance] insetSQLDataModel:model];
+            break;
+            
+        default:
+            break;
+    }
     
-    return NO;
+    return isSuccess;
 }
-+ (BOOL)updateDocumentDataWithType:(LocalDateType)dataType andModel:(DetailModel *)model andUpModel:(DetailModel *)updateModel{
++ (BOOL)updateDocumentDataWithType:(LocalDateType)dataType andUpModel:(DetailModel *)updateModel{
+    BOOL isSuccess = NO;
     
+    switch (dataType) {
+        case LocalDateTypeSQL:
+            isSuccess =[[FMDBSQLServices shareInstance] updateSQLDataWithModel:updateModel];
+            break;
+        default:
+            break;
+    }
     
-    return NO;
+    return isSuccess;
 }
 + (BOOL)deleDocumentDateWithType:(LocalDateType)dataType andModel:(DetailModel *)model{
     
+    BOOL isSuccess = NO;
     
+    switch (dataType) {
+        case LocalDateTypeSQL:
+            isSuccess =[[FMDBSQLServices shareInstance] delSQLDataWithModel:model];
+            break;
+        default:
+            break;
+    }
     
-    return NO;
+    return isSuccess;
 }
 @end
