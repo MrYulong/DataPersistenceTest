@@ -50,7 +50,7 @@
     BOOL isSccuess;
     if (self.currentModel) {
         
-        isSccuess = [self.delegate addInfosViewController:self lastModel:self.currentModel updateModel:infoModel];
+        isSccuess = [self.delegate addInfosViewController:self selectIndex:self.selectIndex updateModel:infoModel];
     }else{
         
         isSccuess = [self.delegate addInfosViewController:self insertModel:infoModel];

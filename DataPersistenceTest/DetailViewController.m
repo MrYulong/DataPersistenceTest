@@ -85,12 +85,15 @@
     }else{
         addInfoVC.currentModel = self.dataArray[indexPath.row];
     }
+    addInfoVC.selectIndex = indexPath.row;
     [self.navigationController pushViewController:addInfoVC animated:YES];
 
 }
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleDelete;
 }
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataArray];
@@ -105,18 +108,34 @@
     }
 
     if (isSuccess) {
-        self.dataArray = [array copy];
-        [self.tableview reloadData];
-        NSLog(@"数据删除成功");
+        [self updateUIWithArray:array];
     }
-
 }
+- (void)updateUIWithArray:(NSArray *)array{
+    
+    self.dataArray = [array copy];
+    [self.tableview reloadData];
+    NSLog(@"数据保存成功");
+}
+
 #pragma mark -
 #pragma mark AddInfosViewControllerDelegate
 //更新DetailModel
-- (BOOL)addInfosViewController:(AddInfosViewController *)viewController lastModel:(DetailModel *)aLastModel updateModel:(DetailModel *)upModel{
+- (BOOL)addInfosViewController:(AddInfosViewController *)viewController selectIndex:(NSInteger)index updateModel:(DetailModel *)upModel{
     
-    return NO;
+    BOOL isSuccess = false;
+    if (self.currentDataType == LocalDateTypePlist || self.currentDataType == LocalDateTypeArchiver) {
+        
+        NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataArray];
+        [array replaceObjectAtIndex:index withObject:self.currentDataType == LocalDateTypePlist?[DetailModel dicFromModel:upModel]:upModel];
+        isSuccess = [DocumentDataManger replaceDocumentDataWithType:self.currentDataType andArray:[array copy]];
+        
+        if (isSuccess) {
+            
+            [self updateUIWithArray:array];
+        }
+    }
+    return isSuccess;
 }
 //保存新的DetailModel
 - (BOOL)addInfosViewController:(AddInfosViewController *)viewController  insertModel:(DetailModel *)inModel{
@@ -139,9 +158,7 @@
     }
     
     if (isSuccess) {
-        self.dataArray = [array copy];
-        [self.tableview reloadData];
-        NSLog(@"数据保存成功");
+        [self updateUIWithArray:array];
     }
     return isSuccess;
 }

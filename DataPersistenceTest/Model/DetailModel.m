@@ -24,8 +24,8 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     
     [aCoder encodeObject:self.usrName forKey:@"userName"];
-    [aCoder encodeObject:self.usrName forKey:@"usrpoint"];
-    [aCoder encodeObject:self.usrName forKey:@"contentDesc"];
+    [aCoder encodeObject:self.usrpoint forKey:@"usrpoint"];
+    [aCoder encodeObject:self.contentDesc forKey:@"contentDesc"];
 
 }
 

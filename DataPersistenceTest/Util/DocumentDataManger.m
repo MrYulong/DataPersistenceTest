@@ -30,9 +30,6 @@
 }
 + (BOOL)replaceDocumentDataWithType:(LocalDateType)dataType andArray:(NSArray *)array{
     
-    if (dataType == LocalDateTypePlist) {
-        
-    }
     switch (dataType) {
         case LocalDateTypePlist:
             return [PlistDataManger updateDocumentPlistArrayWithArr:array];
