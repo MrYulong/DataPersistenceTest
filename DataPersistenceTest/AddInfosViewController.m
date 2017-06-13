@@ -46,7 +46,8 @@
     infoModel.usrName      = self.nameTextField.text;
     infoModel.contentDesc  = self.desTextField.text;
     infoModel.usrpoint     = self.pointTextField.text;
-    
+    infoModel.usrID     = self.currentModel.usrID;
+
     BOOL isSccuess;
     if (self.currentModel) {
         

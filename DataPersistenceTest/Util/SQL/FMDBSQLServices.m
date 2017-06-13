@@ -42,7 +42,7 @@
         NSLog(@"打开失败");
     }
     //创建用户表
-    [_dataBase executeUpdate:@"CREATE TABLE 'userTable'('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL , 'usrName' VARCHAR(255), 'usrpoint' VARCHAR(255), 'contentDesc' VARCHAR(255))"];
+    [_dataBase executeUpdate:@"CREATE TABLE userTable('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL , 'usrName' VARCHAR(255), 'usrpoint' VARCHAR(255), 'contentDesc' VARCHAR(255))"];
     [_dataBase close];
 }
 
@@ -58,8 +58,14 @@
     return path;
 }
 
+#pragma mark -
+#pragma mark public
 - (NSArray *)getDoucmentArray{
     
+    if (![_dataBase open]) {
+        NSLog(@"数据库打开失败");
+    }
+
     NSMutableArray *array = [NSMutableArray new];
     FMResultSet *result = [_dataBase executeQuery:@"select * from userTable"];
     while ([result next]) {
@@ -71,26 +77,37 @@
         model.contentDesc   = [result stringForColumn:@"contentDesc"];
         [array addObject:model];
     };
-    
+    [_dataBase close];
+
     return array;
 }
 - (BOOL) insetSQLDataModel:(DetailModel *)model{
     
-    BOOL isSuccess = [_dataBase executeUpdate:[NSString stringWithFormat:@"insert into userTable(usrName,usrpoint,contentDesc) values(%@,%@,%@)",model.usrName,model.usrpoint,model.contentDesc]];
-    
+    if (![_dataBase open]) {
+        NSLog(@"数据库打开失败");
+    }
+    BOOL isSuccess = [_dataBase executeUpdate:[NSString stringWithFormat:@"insert into userTable(usrName,usrpoint,contentDesc) values('%@','%@','%@')",model.usrName,model.usrpoint,model.contentDesc]];
+    [_dataBase close];
     return isSuccess;
 }
 - (BOOL) updateSQLDataWithModel:(DetailModel *)model{
     
-    BOOL isSuccess = [_dataBase executeUpdate:[NSString stringWithFormat:@"update 'userTable' set usrName = %@ where id = %lu",model.usrName,model.usrID]];
-    [_dataBase executeUpdate:[NSString stringWithFormat:@"update 'userTable' set usrpoint = %@ where id = %lu",model.usrpoint,model.usrID]];
-    [_dataBase executeUpdate:[NSString stringWithFormat:@"update 'userTable' set contentDesc = %@ where id = %lu",model.contentDesc,model.usrID]];
+    if (![_dataBase open]) {
+        NSLog(@"数据库打开失败");
+    }
+    BOOL isSuccess = [_dataBase executeUpdate:[NSString stringWithFormat:@"update userTable set usrName = '%@' ,usrpoint = '%@',contentDesc = '%@' where id = %lu",model.usrName,model.usrpoint,model.contentDesc,model.usrID]];
+    [_dataBase close];
 
     return isSuccess;
 }
 - (BOOL)delSQLDataWithModel:(DetailModel *)model{
     
-    return  [_dataBase executeUpdate:[NSString stringWithFormat:@"delete from userTable where id = %lu",model.usrID]];
+    if (![_dataBase open]) {
+        NSLog(@"数据库打开失败");
+    }
+    BOOL isSuccess = [_dataBase executeUpdate:[NSString stringWithFormat:@"delete from userTable where id = %lu",model.usrID]];
+    [_dataBase close];
+    return isSuccess;
 }
 
 

@@ -99,14 +99,7 @@
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataArray];
     [array removeObjectAtIndex:indexPath.row];
     
-    BOOL isSuccess = false;
-    if (self.currentDataType == LocalDateTypePlist || self.currentDataType == LocalDateTypeArchiver) {
-        
-        isSuccess = [DocumentDataManger replaceDocumentDataWithType:self.currentDataType andArray:[array copy]];
-    }else{
-        
-    }
-
+    BOOL isSuccess = [DocumentDataManger deleTheDocumentDataWithType:self.currentDataType andArray:array andUpModel:self.dataArray[indexPath.row]];
     if (isSuccess) {
         [self updateUIWithArray:array];
     }
@@ -123,19 +116,12 @@
 //更新DetailModel
 - (BOOL)addInfosViewController:(AddInfosViewController *)viewController selectIndex:(NSInteger)index updateModel:(DetailModel *)upModel{
     
-    BOOL isSuccess = false;
-    if (self.currentDataType == LocalDateTypePlist || self.currentDataType == LocalDateTypeArchiver) {
-        
-        NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataArray];
-        [array replaceObjectAtIndex:index withObject:self.currentDataType == LocalDateTypePlist?[DetailModel dicFromModel:upModel]:upModel];
-        isSuccess = [DocumentDataManger replaceDocumentDataWithType:self.currentDataType andArray:[array copy]];
-        
-        if (isSuccess) {
-            
-            [self updateUIWithArray:array];
-        }
+    NSArray *array = [DocumentDataManger updateTheDocumentDataWithType:self.currentDataType andArray:self.dataArray selectIndex:index andUpModel:upModel];
+    
+    if (array) {
+        [self updateUIWithArray:array];
     }
-    return isSuccess;
+    return array?YES:NO;
 }
 //保存新的DetailModel
 - (BOOL)addInfosViewController:(AddInfosViewController *)viewController  insertModel:(DetailModel *)inModel{
@@ -148,15 +134,8 @@
     }else{
         [array addObject:inModel];
     }
-    BOOL isSuccess = false;
-    if (self.currentDataType == LocalDateTypePlist || self.currentDataType == LocalDateTypeArchiver) {
-        
-        isSuccess = [DocumentDataManger replaceDocumentDataWithType:self.currentDataType andArray:[array copy]];
-    }else{
-        
-       isSuccess = [DocumentDataManger insertDocumentDataWithType:self.currentDataType andModel:inModel];
-    }
     
+    BOOL isSuccess = [DocumentDataManger insertTheDocumentDataWithType:self.currentDataType andArray:array andUpModel:inModel];
     if (isSuccess) {
         [self updateUIWithArray:array];
     }

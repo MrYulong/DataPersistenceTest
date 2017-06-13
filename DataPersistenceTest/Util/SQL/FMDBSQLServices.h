@@ -16,6 +16,6 @@
 - (NSArray *)getDoucmentArray;
 - (BOOL) insetSQLDataModel:(DetailModel *)model;
 - (BOOL) updateSQLDataWithModel:(DetailModel *)model;
-- (BOOL)delSQLDataWithModel:(DetailModel *)model;
+- (BOOL) delSQLDataWithModel:(DetailModel *)model;
 
 @end

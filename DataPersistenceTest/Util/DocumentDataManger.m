@@ -10,9 +10,12 @@
 #import "PlistDataManger.h"
 #import "ArchiverDataManager.h"
 #import "FMDBSQLServices.h"
+#import "DetailModel.h"
 
 @implementation DocumentDataManger
 
+#pragma mark -
+#pragma mark public
 + (NSArray *)loadDocumentData:(LocalDateType)dataType{
     
     NSArray *array = [NSArray new];
@@ -32,6 +35,70 @@
     }
     return array;
 }
+
++ (NSArray *)updateTheDocumentDataWithType:(LocalDateType)dataType andArray:(NSArray *)array selectIndex:(NSInteger)index andUpModel:(DetailModel *)updateModel{
+    
+    BOOL isSuccess = false;
+    NSMutableArray *mubarray = [NSMutableArray arrayWithArray:array];
+
+    if (dataType == LocalDateTypePlist || dataType == LocalDateTypeArchiver) {
+        
+        [mubarray replaceObjectAtIndex:index withObject:dataType == LocalDateTypePlist?[DetailModel dicFromModel:updateModel]:updateModel];
+        isSuccess = [DocumentDataManger replaceDocumentDataWithType:dataType andArray:[array copy]];
+        
+    }else if (dataType == LocalDateTypeSQL){
+        
+        isSuccess = [DocumentDataManger updateDocumentDataWithType:dataType andUpModel:updateModel];
+        
+        [mubarray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            DetailModel *detail = obj;
+            if (detail.usrID == updateModel.usrID) {
+                
+                [mubarray replaceObjectAtIndex:idx withObject:updateModel];
+                *stop = YES;
+            }
+        }];
+    }
+    if (!isSuccess) {
+        return nil;
+    }
+    return mubarray;
+}
+
++ (BOOL)deleTheDocumentDataWithType:(LocalDateType)dataType andArray:(NSArray *)array andUpModel:(DetailModel *)updateModel{
+    
+    BOOL isSuccess = false;
+    if (dataType == LocalDateTypePlist || dataType == LocalDateTypeArchiver) {
+        
+        isSuccess = [DocumentDataManger replaceDocumentDataWithType:dataType andArray:[array copy]];
+    }else{
+        
+        isSuccess = [DocumentDataManger deleDocumentDateWithType:dataType andModel:updateModel];
+    }
+
+    return isSuccess;
+    
+}
++ (BOOL)insertTheDocumentDataWithType:(LocalDateType)dataType andArray:(NSArray *)array andUpModel:(DetailModel *)updateModel{
+ 
+    BOOL isSuccess = false;
+    if (dataType == LocalDateTypePlist || dataType == LocalDateTypeArchiver) {
+        
+        isSuccess = [DocumentDataManger replaceDocumentDataWithType:dataType andArray:[array copy]];
+    }else{
+        
+        isSuccess = [DocumentDataManger insertDocumentDataWithType:dataType andModel:updateModel];
+    }
+    return isSuccess;
+}
+
+
+
+
+#pragma mark -
+#pragma mark privite
+
 + (BOOL)replaceDocumentDataWithType:(LocalDateType)dataType andArray:(NSArray *)array{
     
     switch (dataType) {
