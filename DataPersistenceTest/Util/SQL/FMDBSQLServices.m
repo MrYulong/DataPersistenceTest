@@ -2,7 +2,7 @@
 //  FMDBSQLServices.m
 //  DataPersistenceTest
 //
-//  Created by 刘玉龙(平安好房技术中心业务研发部用户产品研发团队) on 2017/6/12.
+//  Created by long_ on 2017/6/12.
 //  Copyright © 2017年 long_. All rights reserved.
 //
 

@@ -11,6 +11,7 @@
 #import "ArchiverDataManager.h"
 #import "FMDBSQLServices.h"
 #import "DetailModel.h"
+#import "CoreDataServices.h"
 
 @implementation DocumentDataManger
 
@@ -30,6 +31,9 @@
         case LocalDateTypeSQL:
             array = [[FMDBSQLServices shareInstance] getDoucmentArray];
             break;
+        case LocalDateTypeCoreData:
+            array = [[CoreDataServices shareInstance] fetchLocalDataArray];
+            break;
         default:
             break;
     }
@@ -46,7 +50,7 @@
         [mubarray replaceObjectAtIndex:index withObject:dataType == LocalDateTypePlist?[DetailModel dicFromModel:updateModel]:updateModel];
         isSuccess = [DocumentDataManger replaceDocumentDataWithType:dataType andArray:[array copy]];
         
-    }else if (dataType == LocalDateTypeSQL){
+    }else {
         
         isSuccess = [DocumentDataManger updateDocumentDataWithType:dataType andUpModel:updateModel];
         
@@ -121,7 +125,9 @@
         case LocalDateTypeSQL:
             isSuccess =[[FMDBSQLServices shareInstance] insetSQLDataModel:model];
             break;
-            
+        case LocalDateTypeCoreData:
+            isSuccess = [[CoreDataServices shareInstance] addNewItemModel:model];
+            break;
         default:
             break;
     }
@@ -134,6 +140,9 @@
     switch (dataType) {
         case LocalDateTypeSQL:
             isSuccess =[[FMDBSQLServices shareInstance] updateSQLDataWithModel:updateModel];
+            break;
+        case LocalDateTypeCoreData:
+            isSuccess = [[CoreDataServices shareInstance] updateItemModel:updateModel];
             break;
         default:
             break;
@@ -148,6 +157,9 @@
     switch (dataType) {
         case LocalDateTypeSQL:
             isSuccess =[[FMDBSQLServices shareInstance] delSQLDataWithModel:model];
+            break;
+        case LocalDateTypeCoreData:
+            isSuccess =[[CoreDataServices shareInstance] deleteItemModel:model];
             break;
         default:
             break;

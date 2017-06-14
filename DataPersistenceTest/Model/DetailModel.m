@@ -37,6 +37,7 @@
     instance.usrName = self.usrName.copy;
     instance.usrpoint = self.usrpoint.copy;
     instance.contentDesc = self.contentDesc.copy;
+    instance.usrID = self.usrID;
 
     return instance;
 }
@@ -47,7 +48,8 @@
 }
 + (NSDictionary *) dicFromModel:(DetailModel *)model{
     
-    return @{@"usrName"     : model.usrName?:@"",
+    return @{@"usrID"       : @(model.usrID)?:@"",
+             @"usrName"     : model.usrName?:@"",
              @"usrpoint"    : model.usrpoint?:@"",
              @"contentDesc" : model.contentDesc?:@""};
     

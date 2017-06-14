@@ -26,6 +26,9 @@
 		D14B6A151EE922F0009E8F65 /* DocumentDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A141EE922F0009E8F65 /* DocumentDataManger.m */; };
 		D14B6A1B1EEA7A9B009E8F65 /* ArchiverDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A1A1EEA7A9B009E8F65 /* ArchiverDataManager.m */; };
 		D14B6A1E1EEE8A7D009E8F65 /* FMDBSQLServices.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A1D1EEE8A7D009E8F65 /* FMDBSQLServices.m */; };
+		D14B6A3A1EF0D5B8009E8F65 /* UserManagerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A391EF0D5B8009E8F65 /* UserManagerObject.m */; };
+		D14B6A3D1EF0D8B9009E8F65 /* PersistenceContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A3C1EF0D8B9009E8F65 /* PersistenceContextManager.m */; };
+		D14B6A481EF105AA009E8F65 /* CoreDataServices.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B6A471EF105AA009E8F65 /* CoreDataServices.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,12 @@
 		D14B6A1A1EEA7A9B009E8F65 /* ArchiverDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiverDataManager.m; sourceTree = "<group>"; };
 		D14B6A1C1EEE8A7D009E8F65 /* FMDBSQLServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBSQLServices.h; sourceTree = "<group>"; };
 		D14B6A1D1EEE8A7D009E8F65 /* FMDBSQLServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBSQLServices.m; sourceTree = "<group>"; };
+		D14B6A381EF0D5B8009E8F65 /* UserManagerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManagerObject.h; sourceTree = "<group>"; };
+		D14B6A391EF0D5B8009E8F65 /* UserManagerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManagerObject.m; sourceTree = "<group>"; };
+		D14B6A3B1EF0D8B9009E8F65 /* PersistenceContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceContextManager.h; sourceTree = "<group>"; };
+		D14B6A3C1EF0D8B9009E8F65 /* PersistenceContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceContextManager.m; sourceTree = "<group>"; };
+		D14B6A461EF105AA009E8F65 /* CoreDataServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataServices.h; sourceTree = "<group>"; };
+		D14B6A471EF105AA009E8F65 /* CoreDataServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataServices.m; sourceTree = "<group>"; };
 		E2D32750E4DF895663DB8564 /* Pods-DataPersistenceTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataPersistenceTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataPersistenceTest/Pods-DataPersistenceTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +132,13 @@
 		0C8E8AE21EE98A250063CAB4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				D14B69C71EE8DCFC009E8F65 /* DataPersistenceTest.xcdatamodeld */,
+				D14B6A381EF0D5B8009E8F65 /* UserManagerObject.h */,
+				D14B6A391EF0D5B8009E8F65 /* UserManagerObject.m */,
+				D14B6A3B1EF0D8B9009E8F65 /* PersistenceContextManager.h */,
+				D14B6A3C1EF0D8B9009E8F65 /* PersistenceContextManager.m */,
+				D14B6A461EF105AA009E8F65 /* CoreDataServices.h */,
+				D14B6A471EF105AA009E8F65 /* CoreDataServices.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -184,7 +200,6 @@
 				D14B69CA1EE8DCFC009E8F65 /* Assets.xcassets */,
 				D14B69CC1EE8DCFC009E8F65 /* LaunchScreen.storyboard */,
 				D14B69CF1EE8DCFC009E8F65 /* Info.plist */,
-				D14B69C71EE8DCFC009E8F65 /* DataPersistenceTest.xcdatamodeld */,
 				D14B69BB1EE8DCFC009E8F65 /* Supporting Files */,
 			);
 			path = DataPersistenceTest;
@@ -451,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D14B6A3A1EF0D5B8009E8F65 /* UserManagerObject.m in Sources */,
 				0C8E8AE01EE984670063CAB4 /* AddInfosViewController.m in Sources */,
 				D14B6A1E1EEE8A7D009E8F65 /* FMDBSQLServices.m in Sources */,
 				D14B69F61EE8EB46009E8F65 /* DetailViewController.m in Sources */,
@@ -459,8 +475,10 @@
 				D14B6A1B1EEA7A9B009E8F65 /* ArchiverDataManager.m in Sources */,
 				D14B69C91EE8DCFC009E8F65 /* DataPersistenceTest.xcdatamodeld in Sources */,
 				D14B6A121EE91E6E009E8F65 /* PlistDataManger.m in Sources */,
+				D14B6A3D1EF0D8B9009E8F65 /* PersistenceContextManager.m in Sources */,
 				D14B69BD1EE8DCFC009E8F65 /* main.m in Sources */,
 				D14B6A151EE922F0009E8F65 /* DocumentDataManger.m in Sources */,
+				D14B6A481EF105AA009E8F65 /* CoreDataServices.m in Sources */,
 				D14B69F31EE8E57B009E8F65 /* ListTableViewController.m in Sources */,
 				D14B6A091EE91C78009E8F65 /* DetailInfoCell.m in Sources */,
 			);
@@ -727,7 +745,8 @@
 				D14B69C81EE8DCFC009E8F65 /* DataPersistenceTest.xcdatamodel */,
 			);
 			currentVersion = D14B69C81EE8DCFC009E8F65 /* DataPersistenceTest.xcdatamodel */;
-			path = DataPersistenceTest.xcdatamodeld;
+			name = DataPersistenceTest.xcdatamodeld;
+			path = ../../DataPersistenceTest.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
