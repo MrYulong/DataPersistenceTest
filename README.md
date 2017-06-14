@@ -5,5 +5,5 @@
 1、属性列表
 2、归档对象
 3、基于FMDB的SQL存储
-4、Apple家自带的CoreData
+4、CoreData
 
